@@ -17,7 +17,7 @@ const Article = mongoose.model('Article', articleSchema);
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, function() {
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, function(err) {
     if (err) {
         console.log(err)
     }
