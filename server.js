@@ -8,7 +8,7 @@ const bodyParser = require('body-parser')
 //var app = express();
 
 
-
+const PORT = process.env.PORT || 4000;
 const articleSchema = new mongoose.Schema({
     link: String
 });
@@ -83,4 +83,4 @@ app.get('/articles', function(req, res) {
         articles
     });
 })
-app.listen(4000);
+app.listen(PORT);
