@@ -19,6 +19,8 @@ const app = express();
 
 app.engine('handlebars', expresshandlebars());
 app.set('view engine', 'handlebars');
+app.use(express.static('public'));
+
 
 
 app.get('/', function(req, res) {
@@ -29,15 +31,24 @@ app.get('/', function(req, res) {
 })
 
 
-app.get('/screpe', function(res, res) {
+app.get('/scrape', function(req, res) {
 
 
-    axios.get('https://www.nytimes.com/').then(function(response) {
+    axios.get('https://www.nytimes.com/section/politics').then(function(response) {
 
-        console.log(response);
+        const articles = [];
+        const $ = cheerio.load(response.data)
+
+        $('.e1xfvim30').map(function() {
+            let article = $(this).contents().text();
+            articles.push(article);
+            console.log(article)
+        })
+
+        return res.json(articles)
 
     })
 
 })
 
-app.listen(5000);
+app.listen(4000);
